@@ -20,6 +20,10 @@ fn main() {
         match n_string.trim().parse::<u32>() {
             // If the string is a valid unsigned integer, then save as an integer.
             Ok(num) => {
+                if num > 47 {
+                    println!("(0 >= N <= 47)");
+                    continue;
+                }
                 n_val = num;
                 break;
             },
