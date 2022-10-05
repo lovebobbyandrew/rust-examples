@@ -1,5 +1,5 @@
 fn main() {
-    // Without the mut keyword, this operation would be forbidden.
+    // Without the mut keyword, changing the value of x would be forbidden.
     let mut x = 5;
     println!("The value of x is: {}", x);
     x = 6;
