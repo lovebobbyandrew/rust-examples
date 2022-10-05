@@ -1,1 +1,1 @@
-/home/bobby/Code/Rust/temperature/target/debug/temperature: /home/bobby/Code/Rust/temperature/src/main.rs
+/home/bobby/Code/Rust/rust/temperature/target/debug/temperature: /home/bobby/Code/Rust/rust/temperature/src/main.rs

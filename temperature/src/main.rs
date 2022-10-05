@@ -1,12 +1,37 @@
 fn main() {
     let mut main_exit = false;
     while main_exit != true {
+        // Get the input temperature value.
         // Default string object constructor.
+        let mut temp_string = String::new();
+        let temp_val: f32;
+        loop {
+            temp_string.clear();
+            println!("Temperature value?");
+            println!("(-36, 45, 83, 108, etc.)");
+            // Crashes program upon unreadable input.
+            std::io::stdin()
+                .read_line(&mut temp_string)
+                .expect("read failure, panic invoked");
+            // Ensures the user inputs a valid number.
+            match temp_string.trim().parse::<f32>() {
+                // If the string is a valid integer, then save as an integer.
+                Ok(num) => {
+                    temp_val = num;
+                    break;
+                },
+                Err(_) => {
+                    println!("Invalid value, try again.");
+                    continue;
+                },
+            };
+        }
+        // Get the unit of the input temperature.
         let mut input_unit = String::new();
         loop {
             input_unit.clear();
-            println!("Input?");
-            // Crashes program upon unreadable input.
+            println!("Input units?");
+            println!("(C, K, or F)");
             std::io::stdin()
                 .read_line(&mut input_unit)
                 .expect("read failure, panic invoked");
@@ -26,15 +51,17 @@ fn main() {
                 },
                 // Default case is indicated by an underscore.
                 _ => {
-                    println!("(C, K, or F)");
+                    println!("Invalid unit, try again.");
                     continue;
                 },
             }
         }
+        // Get the unit of the output temperature.
         let mut output_unit = String::new();
         loop {
             output_unit.clear();
-            println!("Output?");
+            println!("Output units?");
+            println!("(C, K, or F)");
             std::io::stdin()
                 .read_line(&mut output_unit)
                 .expect("read failure, panic invoked");
@@ -51,34 +78,13 @@ fn main() {
                     break;
                 },
                 _ => {
-                    println!("(C, K, or F)");
+                    println!("Invalid unit, try again.");
                     continue;
                 },
             }
         }
-        let mut temp_string = String::new();
-        let temp_val: f32;
-        loop {
-            temp_string.clear();
-            println!("Temperature?");
-            std::io::stdin()
-                .read_line(&mut temp_string)
-                .expect("read failure, panic invoked");
-            // Ensures the user inputs a valid number.
-            match temp_string.trim().parse::<f32>() {
-                // If the string is a valid integer, then save as an integer.
-                Ok(num) => {
-                    temp_val = num;
-                    break;
-                },
-                Err(_) => {
-                    println!("(45, 83, 108, etc.)");
-                    continue;
-                },
-            };
-        }
         let output_val;
-        // Convert the current unit to the desired unit.
+        // Convert the input unit value to the output unit value.
         match input_unit.as_str() {
             "C" => {
                 match output_unit.as_str() {
@@ -137,7 +143,9 @@ fn main() {
         let mut repeat = String::new();
         // Decides whether to run the program again or exit.
         loop {
-        println!("Continue?");
+            repeat.clear();
+            println!("Continue?");
+            println!("(N or Y)");
             std::io::stdin()
                 .read_line(&mut repeat)
                 .expect("read failure, panic invoked");
@@ -153,7 +161,7 @@ fn main() {
                     break;
                 },
                 _ => {
-                    println!("(N or Y)");
+                    println!("Invalid choice, try again.");
                     continue;
                 },
             }
