@@ -26,6 +26,7 @@ impl Config {
 }
 
 // Box is a trait object, so this function will return a type that implements the Error trait.
+// Box allows for allocating values on the heap.
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = std::fs::read_to_string(config.filename)?;
     for line in search(&config.query, &contents) {
